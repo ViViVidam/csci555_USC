@@ -1,4 +1,5 @@
 # THANOS (Thread & memory migration Algorithms for NUMA Optimised Scheduling)
+#### Forked, This is only for course project
 Hopefully, Marvel will take this as a fan reference and not like a copyright infringement.
 
 This repo holds the migration tool for NUMA systems developed by Ruben Laso Rodriguez for his PhD thesis as a continuation of Oscar's García Lorenzo PhD thesis.
