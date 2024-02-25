@@ -1,0 +1,1 @@
+Checks: 'bugprone-*,cert-*,cppcoreguidelines-*,clang-analyzer-*,cppcoreguidelines-*,hicpp-*,llvm-*,misc-*,modernize-*,performance-*,readability-*,-readability-identifier-length'

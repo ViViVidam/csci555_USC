@@ -1,0 +1,13 @@
+*.out
+*.o
+*.stderr
+*.stdout
+*.opt
+
+*.DS_Store*
+
+.idea/
+cmake-build-*/
+
+src/thanos
+thanos

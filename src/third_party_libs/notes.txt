@@ -1,0 +1,1 @@
+Credits to the people of Tabulate, awesome library. Check at https://github.com/p-ranav/tabulate.
