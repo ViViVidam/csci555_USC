@@ -33,7 +33,7 @@ namespace migration::memory {
 	// Latency Memory pages Migration Algorithm
 	class lmma : public migration::memory::Istrategy {
 	private:
-		static constexpr lat_t REL_LATENCY_THRESHOLD    = 130; // 130 %
+		static constexpr lat_t REL_LATENCY_THRESHOLD    = 130; // 130 %, 大于这个值叫做busy node
 		static constexpr lat_t SATURATED_NODE_THRESHOLD = 130; // 130 %
 
 		[[nodiscard]] static inline auto is_node_saturated(const node_t node) -> bool {
@@ -42,7 +42,7 @@ namespace migration::memory {
 
 			return (node_latency * 100 / sys_latency) > SATURATED_NODE_THRESHOLD;
 		}
-
+		// nodiscard如果返回值没被使用 报警
 		[[nodiscard]] static auto perform_migration_algorithm_all_pages() -> std::vector<mem_migration_cell> {
 			size_t migrations_to_preferred       = 0;
 			size_t migrations_to_least_saturated = 0;
@@ -54,6 +54,7 @@ namespace migration::memory {
 			std::vector<mem_migration_cell> migrations;
 
 			// Preallocate some memory to save time later
+			// Performance table
 			migrations.reserve(perf_table.size());
 
 			for (auto & [mem_page, info] : perf_table) {
@@ -67,7 +68,8 @@ namespace migration::memory {
 
 				const auto rel_latency =
 				    info.av_latency() * 100 / perf_table.av_latency(); // = perf_table.rel_latency(mem_page);
-
+				//这个memory page得lat与全局lat比较
+				//如果大的话这个page就要migrate
 				if (std::cmp_greater(rel_latency, REL_LATENCY_THRESHOLD)) {
 					const auto & ratios = info.ratios();
 
