@@ -308,7 +308,7 @@ namespace {
 
 		// Prepare output files
 		setup_output_files();
-
+		printf("333333\n");
 		// Init sampling system
 		if (!samples::init()) { clean_end(SIGTERM, nullptr, nullptr); }
 
