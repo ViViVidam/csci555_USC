@@ -62,7 +62,8 @@ namespace samples {
 
 	auto rotate_enabled_counters() -> bool;
 
-	auto init() -> bool;
+	auto
+	init() -> bool;
 
 	auto read_samples() -> std::vector<samples::pebs>;
 
