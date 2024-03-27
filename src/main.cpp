@@ -311,7 +311,7 @@ namespace {
 		printf("333333\n");
 		// Init sampling system
 		if (!samples::init()) { clean_end(SIGTERM, nullptr, nullptr); }
-
+		printf("4444444\n");
 		migration::read_tickets_file(file_read_tickets);
 		printf("1111111\n");
 		// Sets up handler for some signals for a clean end
