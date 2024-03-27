@@ -313,7 +313,7 @@ namespace {
 		if (!samples::init()) { clean_end(SIGTERM, nullptr, nullptr); }
 
 		migration::read_tickets_file(file_read_tickets);
-		printf("1111111\n")
+		printf("1111111\n");
 		// Sets up handler for some signals for a clean end
 		setup_signals();
 		printf("222222\n");
