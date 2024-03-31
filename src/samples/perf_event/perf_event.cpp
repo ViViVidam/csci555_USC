@@ -272,6 +272,9 @@ namespace samples {
 			for (const auto & group : groups) {
 				const auto & event     = details::events.at(group);
 				const auto   event_int = pfm_find_event(event);
+ps) {
+				const auto & event     = details::events.at(group);
+				const auto   event_int = pfm_find_event(event);
 
 				if (std::cmp_less(event_int, 0)) {
 					std::cerr << "Event " << event << " not found. " << pfm_strerror(event_int) << '\n';
