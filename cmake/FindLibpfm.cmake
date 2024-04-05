@@ -6,7 +6,7 @@
 # LIBPFM_LIBRARY     - List of libraries for using libpfm
 # LIBPFM_FOUND       - True if libpfm was found
 
-set(LIBPFM_INSTALL "" CACHE PATH "libpfm install directory")
+set(LIBPFM_INSTALL "/usr/local" CACHE PATH "libpfm install directory")
 
 if(LIBPFM_INSTALL)
     # install dir specified, only search them
