@@ -5,11 +5,11 @@ sample_sz = 3
 classname = "C"
 matchp = " Time in seconds"
 for target in targets:
+    times = 0
     for i in range(1,1+sample_sz):
-        times = 0
         with open(f"{target}.{classname}.x.{i}_output","r") as f:
             for line in f.readlines():
                 if line[:len(matchp)] == matchp:
                     time = line.split(" ")[-1]
                     times += float(time)
-        print(f"{target} {classname} {times/sample_sz}")
+    print(f"{target} {classname} {times/sample_sz}")
