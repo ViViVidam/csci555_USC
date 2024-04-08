@@ -6,3 +6,5 @@ do
    make "$i" CLASS="$class"
    # or do whatever with individual element of the array
 done
+
+make dc CLASS=B
