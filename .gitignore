@@ -12,3 +12,4 @@ cmake-build-*/
 src/thanos
 thanos
 build/
+./CMakeFiles

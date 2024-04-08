@@ -1,3 +1,0 @@
-/home/xie/code/USC/csci555_USC/CMakeFiles/thanos.dir
-/home/xie/code/USC/csci555_USC/CMakeFiles/edit_cache.dir
-/home/xie/code/USC/csci555_USC/CMakeFiles/rebuild_cache.dir

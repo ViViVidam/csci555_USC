@@ -1,4 +1,0 @@
-/home/xie/code/USC/csci555_USC/CMakeFiles/_CMakeLTOTest-C/bin/CMakeFiles/foo.dir
-/home/xie/code/USC/csci555_USC/CMakeFiles/_CMakeLTOTest-C/bin/CMakeFiles/boo.dir
-/home/xie/code/USC/csci555_USC/CMakeFiles/_CMakeLTOTest-C/bin/CMakeFiles/edit_cache.dir
-/home/xie/code/USC/csci555_USC/CMakeFiles/_CMakeLTOTest-C/bin/CMakeFiles/rebuild_cache.dir
