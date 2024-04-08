@@ -1,5 +1,4 @@
 #!/bin/bash
-mkdir "bin"
 class="C"
 targets=(bt cg dt ep ft is lu mg sp ua)
 for i in "${targets[@]}"
