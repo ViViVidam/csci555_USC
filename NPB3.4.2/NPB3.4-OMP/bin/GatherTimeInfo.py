@@ -3,9 +3,9 @@ files = listdir()
 targets = ["bt","cg","ep","ft","is","lu","mg","sp","ua"]
 sample_sz = 3
 classname = "C"
-matchp = "Time in seconds"
+matchp = " Time in seconds"
 for target in targets:
-    for i in range(sample_sz):
+    for i in range(1,1+sample_sz):
         times = 0
         with open(f"{target}.{classname}.x.{i}_output","r") as f:
             for line in f.readlines():
