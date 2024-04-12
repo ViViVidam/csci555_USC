@@ -36,6 +36,7 @@ def RunTaskThanos(run_seq: bool) -> None:
                 ret = subprocess.Popen(["./thanos","-v 0",f"../NPB3.4.2/NPB3.4-OMP/bin/{file}"], stdout=fout)
                 if run_seq:
                     ret.wait()
+                    print(ret.stderr)
                 else:
                     time.sleep(random.random() * 3)
                 fout.close()
