@@ -43,7 +43,7 @@ def RunTaskThanos(run_seq: bool) -> None:
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 4:
+    if len(sys.argv) != 3:
         print("mode: 1(sequential) 2(parallel), use thanos:1/0")
         exit(0)
     mode = int(sys.argv[1])
