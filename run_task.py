@@ -21,7 +21,7 @@ def RunTask(run_seq: bool) -> None:
                     ret.wait()
                     print(ret.stderr)
                 else:
-                    ret.wait(random.random() * 3)
+                    time.sleep(random.random() * 3)
                 fout.close()
     os.chdir("../../../")
 
