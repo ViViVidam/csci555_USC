@@ -27,7 +27,7 @@ def RunTask(run_seq: bool) -> None:
 
 
 def RunTaskThanos(run_seq: bool) -> None:
-    os.chdir("bin")
+    os.chdir("build")
     files = os.listdir("./NPB3.4.2/NPB3.4-OMP/bin/")
     for file in files:
         if file.endswith(".x"):
@@ -47,7 +47,7 @@ if __name__ == "__main__":
         print("mode: 1(sequential) 2(parallel), use thanos:1/0")
         exit(0)
     mode = int(sys.argv[1])
-    use_thanos = bool(sys.argv[2])
+    use_thanos = (sys.argv[2] == '1')
     if use_thanos:
         RunTaskThanos(mode == 1)
     else:
