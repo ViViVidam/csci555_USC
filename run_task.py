@@ -16,7 +16,7 @@ def RunTask(run_seq: bool) -> None:
         if file.endswith(".x"):
             for i in range(max_usr_cnt):
                 fout = open("{file}.{i}_output", "w")
-                ret = subprocess.Popen(["./thanos", f"./NPB3.4.2/NPB3.4-OMP/bin/{file}"], stdout=fout)
+                ret = subprocess.Popen([f"./NPB3.4.2/NPB3.4-OMP/bin/{file}"], stdout=fout)
                 if run_seq:
                     ret.wait()
                     print(ret.stderr)
