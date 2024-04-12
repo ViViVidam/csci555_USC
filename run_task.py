@@ -15,7 +15,7 @@ def RunTask(run_seq: bool) -> None:
     for file in files:
         if file.endswith(".x"):
             for i in range(max_usr_cnt):
-                fout = open("{file}.{i}_output", "w")
+                fout = open(f"{file}.{i}_output", "w")
                 ret = subprocess.Popen([f"./{file}"], stdout=fout)
                 if run_seq:
                     ret.wait()
