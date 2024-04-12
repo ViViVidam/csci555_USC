@@ -37,7 +37,7 @@ def RunTaskThanos(run_seq: bool) -> None:
                 if run_seq:
                     ret.wait()
                 else:
-                    ret.wait(random.random() * 3)
+                    time.sleep(random.random() * 3)
                 fout.close()
     os.chdir("../../../")
 
