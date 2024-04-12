@@ -505,9 +505,7 @@ namespace samples {
 			std::cerr << "Could not setup sampling method..." << '\n';
 			return false;
 		}
-		printf("1111111\n");
 		if (!init_pfm()) { return false; }
-		printf("1111111\n");
 		// Sets up counter configuration
 		for (const auto & cpu : system_info::cpus()) {
 			for (const auto & group : groups) {
@@ -527,7 +525,6 @@ namespace samples {
 
 			++buffer;
 		}
-		printf("1111111\n");
 		// Enable counters
 		if (ENABLE_MULTIPLEXING) {
 			if (!rotate_enabled_counters()) {
@@ -540,7 +537,6 @@ namespace samples {
 				exit(EXIT_FAILURE);
 			}
 		}
-		printf("1111111\n");
 		LAST_HWC_ENABLED = MAX_HW_COUNTERS - 1;
 
 		return true;
