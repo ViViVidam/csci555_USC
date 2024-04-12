@@ -28,12 +28,12 @@ def RunTask(run_seq: bool) -> None:
 
 def RunTaskThanos(run_seq: bool) -> None:
     os.chdir("build")
-    files = os.listdir("./NPB3.4.2/NPB3.4-OMP/bin/")
+    files = os.listdir("../NPB3.4.2/NPB3.4-OMP/bin/")
     for file in files:
         if file.endswith(".x"):
             for i in range(max_usr_cnt):
-                fout = open("./NPB3.4.2/NPB3.4-OMP/bin/{file}.{i}_output", "w")
-                ret = subprocess.Popen(["./thanos", f"./NPB3.4.2/NPB3.4-OMP/bin/{file}"], stdout=fout)
+                fout = open(f"../NPB3.4.2/NPB3.4-OMP/bin/{file}.{i}_output", "w")
+                ret = subprocess.Popen(["./thanos", f"../NPB3.4.2/NPB3.4-OMP/bin/{file}"], stdout=fout)
                 if run_seq:
                     ret.wait()
                 else:
