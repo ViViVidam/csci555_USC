@@ -22,8 +22,10 @@ def RunTask(run_seq: bool) -> None:
                     print(ret.stderr)
                 else:
                     time.sleep(random.random() * 3)
-    for process in processPool:
-        process.wait()
+                processPool.append(ret)
+    if !run_seq:
+        for process in processPool:
+            process.wait()
     os.chdir("../../../")
 
 
@@ -42,8 +44,9 @@ def RunTaskThanos(run_seq: bool) -> None:
                     print(ret.stderr)
                 else:
                     time.sleep(random.random() * 3)
-    for process in processPool:
-        process.wait()
+    if !run_seq:
+        for process in processPool:
+            process.wait()
     os.chdir("../../../")
 
 
