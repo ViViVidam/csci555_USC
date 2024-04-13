@@ -22,7 +22,6 @@ def RunTask(run_seq: bool) -> None:
                     print(ret.stderr)
                 else:
                     time.sleep(random.random() * 3)
-                fout.close()
     os.chdir("../../../")
 
 
@@ -39,7 +38,6 @@ def RunTaskThanos(run_seq: bool) -> None:
                     print(ret.stderr)
                 else:
                     time.sleep(random.random() * 3)
-                fout.close()
     os.chdir("../../../")
 
 
