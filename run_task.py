@@ -22,10 +22,13 @@ def RunTask(run_seq: bool) -> None:
                     print(ret.stderr)
                 else:
                     time.sleep(random.random() * 3)
+    for process in processPool:
+        ret.wait()
     os.chdir("../../../")
 
 
 def RunTaskThanos(run_seq: bool) -> None:
+    last_exec = None
     os.chdir("build")
     files = os.listdir("../NPB3.4.2/NPB3.4-OMP/bin/")
     for file in files:
@@ -33,11 +36,14 @@ def RunTaskThanos(run_seq: bool) -> None:
             for i in range(max_usr_cnt):
                 fout = open(f"../NPB3.4.2/NPB3.4-OMP/bin/{file}.{i}_output", "w")
                 ret = subprocess.Popen(["./thanos","-v 0",f"../NPB3.4.2/NPB3.4-OMP/bin/{file}"], stdout=fout)
+                processPool.append(ret)
                 if run_seq:
                     ret.wait()
                     print(ret.stderr)
                 else:
                     time.sleep(random.random() * 3)
+    for process in processPool:
+        ret.wait()
     os.chdir("../../../")
 
 
