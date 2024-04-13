@@ -6,47 +6,50 @@ import time
 max_usr_cnt = 5
 # total_usr_cnt = 100
 targets = ["bt", "cg", "ep", "ft", "is", "lu", "mg", "sp", "ua"]
-processPool = []
+
 
 
 def RunTask(run_seq: bool) -> None:
+    processPool = []
     os.chdir("NPB3.4.2/NPB3.4-OMP/bin/")
     files = os.listdir()
-    for file in files:
-        if file.endswith(".x"):
-            for i in range(max_usr_cnt):
+    for i in range(max_usr_cnt):
+        for file in files:
+            if file.endswith(".x"):
                 fout = open(f"{file}.{i}_output", "w")
                 ret = subprocess.Popen([f"./{file}"], stdout=fout)
                 if run_seq:
                     ret.wait()
                     print(ret.stderr)
                 else:
-                    time.sleep(random.random() * 3)
+                    time.sleep(random.random() * 5)
                 processPool.append(ret)
-    if !run_seq:
-        for process in processPool:
-            process.wait()
+        if not run_seq:
+            for process in processPool:
+                process.wait()
+            processPool.clear()
     os.chdir("../../../")
 
 
 def RunTaskThanos(run_seq: bool) -> None:
-    last_exec = None
+    processPool = []
     os.chdir("build")
     files = os.listdir("../NPB3.4.2/NPB3.4-OMP/bin/")
-    for file in files:
-        if file.endswith(".x"):
-            for i in range(max_usr_cnt):
+    for i in range(max_usr_cnt):
+        for file in files:
+            if file.endswith(".x"):
                 fout = open(f"../NPB3.4.2/NPB3.4-OMP/bin/{file}.{i}_output", "w")
                 ret = subprocess.Popen(["./thanos","-v 0",f"../NPB3.4.2/NPB3.4-OMP/bin/{file}"], stdout=fout)
-                processPool.append(ret)
                 if run_seq:
                     ret.wait()
                     print(ret.stderr)
                 else:
-                    time.sleep(random.random() * 3)
-    if !run_seq:
-        for process in processPool:
-            process.wait()
+                    processPool.append(ret)
+                    time.sleep(random.random() * 5)
+        if not run_seq:
+            for process in processPool:
+                process.wait()
+            processPool.clear()
     os.chdir("../../../")
 
 
