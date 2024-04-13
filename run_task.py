@@ -23,7 +23,7 @@ def RunTask(run_seq: bool) -> None:
                 else:
                     time.sleep(random.random() * 3)
     for process in processPool:
-        ret.wait()
+        process.wait()
     os.chdir("../../../")
 
 
@@ -43,7 +43,7 @@ def RunTaskThanos(run_seq: bool) -> None:
                 else:
                     time.sleep(random.random() * 3)
     for process in processPool:
-        ret.wait()
+        process.wait()
     os.chdir("../../../")
 
 
