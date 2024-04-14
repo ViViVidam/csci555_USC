@@ -86,7 +86,8 @@ endif ()
 
 add_executable(thanos
         src/main.cpp src/utils/verbose.cpp src/system_info/system_info.cpp src/system_info/memory_info.cpp
-        src/samples/samples.cpp src/samples/perf_event/perf_event.cpp src/migration/tickets.cpp)
+        src/samples/samples.cpp src/samples/perf_event/perf_event.cpp src/migration/tickets.cpp
+        src/migration/utils/times.cpp src/migration/migration_var.cpp)
 
 target_link_libraries(thanos numa)
 target_link_libraries(thanos ${THANOS_EXTERNAL_LIBS})
