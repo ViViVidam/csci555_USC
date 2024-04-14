@@ -109,7 +109,12 @@ namespace migration {
 			// Perform strategy
 			if (portion_memory_migrations > 0) {
 				auto strat = current_strategy(strategy);
+				auto beg   = std::clock();
 				strat->migrate();
+				auto exec_t = 1000 * (std::clock() - beg);
+				if (verbose::print_with_lvl(verbose::DEFAULT_LVL)) {
+					std::cout << "exec_time: " << exec_t << std::endl;
+				}
 			}
 
 			clear_data();
