@@ -61,7 +61,9 @@ if __name__ == "__main__":
         exit(0)
     mode = int(sys.argv[1])
     use_thanos = (sys.argv[2] == '1')
+    beg = time.time()
     if use_thanos:
         RunTaskThanos(mode == 1)
     else:
         RunTask(mode == 1)
+    print(f"runtime {(time.time() - beg) / max_usr_cnt}")
