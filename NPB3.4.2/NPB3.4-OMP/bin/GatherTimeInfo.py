@@ -1,7 +1,7 @@
 from os import listdir
 files = listdir()
 targets = ["bt","cg","ep","ft","is","lu","mg","sp","ua","dc"]
-sample_sz = 3
+sample_sz = 5
 classname = "C"
 matchp = " Time in seconds"
 for target in targets:
