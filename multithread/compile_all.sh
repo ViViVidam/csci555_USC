@@ -1,2 +1,2 @@
 #!/bin/bash
-gcc -c memory.cpp -o memory.x
+gcc memory.cpp -lstdc++ -o memory.x
