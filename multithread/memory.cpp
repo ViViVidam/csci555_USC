@@ -27,6 +27,7 @@ int runBenchmark() {
     unsigned int arr_size = 100000;//1000,000
     unsigned int iterations = 900;
 
+
     unsigned int numbers_forw[arr_size];
     unsigned int numbers_rev[arr_size];
 	unsigned int sum_forward = 0;
