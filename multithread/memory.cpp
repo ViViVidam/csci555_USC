@@ -24,8 +24,8 @@ int main(int argc,char** argv){
 int runBenchmark() {
     printf("Beginrn");
 
-    unsigned int arr_size = 100000000;//1000,000
-    unsigned int iterations = 900000;
+    unsigned int arr_size = 100000;//1000,000
+    unsigned int iterations = 90000;
 
     unsigned int numbers_forw[arr_size];
     unsigned int numbers_rev[arr_size];
