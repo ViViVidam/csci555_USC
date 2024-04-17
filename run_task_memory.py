@@ -56,7 +56,7 @@ def RunTaskThanos(run_para:bool,thread_num:int) -> None:
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
+    if len(sys.argv) != 4:
         print("parallel:0/1,max thread num: int, use thanos:1/0")
         exit(0)
     mode = int(sys.argv[1])
