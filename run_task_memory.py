@@ -17,7 +17,7 @@ def RunTask(thread_num: int) -> None:
         for file in files:
             if file.endswith(".x"):
                 fout = open(f"{file}.{i}_output", "w")
-                ret = subprocess.Popen([f"./{file}",f"{thread_num}"], stdout=fout)
+                ret = subprocess.Popen([f"./{file}",f"{thread_num} {4}"], stdout=fout)
                 ret.wait()
                 '''
                 time.sleep(random.random() * 15 + 5)
