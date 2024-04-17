@@ -3,6 +3,7 @@ import os
 import sys
 import subprocess
 import time
+from tqdm import tqdm
 max_usr_cnt = 20
 # total_usr_cnt = 100
 targets = ["bt", "cg", "ep", "ft", "is", "lu", "mg", "sp", "ua"]
@@ -13,9 +14,9 @@ def RunTask(run_para: bool,thread_num: int) -> None:
     processPool = []
     os.chdir("multithread/")
     files = os.listdir()
-    for i in range(max_usr_cnt):
-        for file in files:
-            if file.endswith(".x"):
+    for file in files:
+        if file.endswith(".x"):
+            for i in tqdm.tqdm(range(max_usr_cnt)):
                 fout = open(f"{file}.{i}_output", "w")
                 ret = subprocess.Popen([f"./{file}",f"{thread_num}",f"{4}"], stdout=fout)
                 if not run_para:
@@ -24,11 +25,10 @@ def RunTask(run_para: bool,thread_num: int) -> None:
                 else:
                     processPool.append(ret)
                     time.sleep(random.random() * 5 + 5)
-        if run_para:
-            for process in processPool:
-                process.wait()
-            processPool.clear()
-        print(f"round {i}")
+    if run_para:
+        for process in processPool:
+            process.wait()
+        processPool.clear()
     os.chdir("../")
 
 
@@ -36,9 +36,9 @@ def RunTaskThanos(run_para:bool,thread_num:int) -> None:
     os.chdir("build")
     processPool = []
     files = os.listdir("../multithread/")
-    for i in range(max_usr_cnt):
-        for file in files:
-            if file.endswith(".x"):
+    for file in files:
+        if file.endswith(".x"):
+            for i in tqdm.tqdm(range(max_usr_cnt)):
                 fout = open(f"../multithread/{file}.{i}_output", "w")
                 ret = subprocess.Popen(["./thanos","-v 0",f"../multithread/{file}",f"{thread_num}",f"{4}"], stdout=fout)
                 if not run_para:
@@ -47,10 +47,10 @@ def RunTaskThanos(run_para:bool,thread_num:int) -> None:
                 else:
                     processPool.append(ret)
                     time.sleep(random.random() * 5 + 5)
-        if run_para:
-            for process in processPool:
-                process.wait()
-            processPool.clear()
+    if run_para:
+        for process in processPool:
+            process.wait()
+        processPool.clear()
         print(f"round {i}")
     os.chdir("../")
 
