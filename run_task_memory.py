@@ -39,7 +39,7 @@ def RunTaskThanos(thread_num:int) -> None:
         for file in files:
             if file.endswith(".x"):
                 fout = open(f"../multithread/{file}.{i}_output", "w")
-                ret = subprocess.Popen(["./thanos","-v 0",f"../multithread/{file}",f"{thread_num}"], stdout=fout)
+                ret = subprocess.Popen(["./thanos","-v 0",f"../multithread/{file}",f"{thread_num} {4}"], stdout=fout)
                 ret.wait()
                 '''
                 if run_seq:
