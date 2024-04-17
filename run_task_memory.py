@@ -10,14 +10,13 @@ targets = ["bt", "cg", "ep", "ft", "is", "lu", "mg", "sp", "ua"]
 
 
 def RunTask(thread_num: int) -> None:
-    processPool = []
     os.chdir("multithread/")
     files = os.listdir()
     for i in range(max_usr_cnt):
         for file in files:
             if file.endswith(".x"):
                 fout = open(f"{file}.{i}_output", "w")
-                ret = subprocess.Popen([f"./{file}",f"{thread_num} {4}"], stdout=fout)
+                ret = subprocess.Popen([f"./{file}",f"{thread_num}",f"{4}"], stdout=fout)
                 ret.wait()
                 '''
                 time.sleep(random.random() * 15 + 5)
@@ -32,14 +31,13 @@ def RunTask(thread_num: int) -> None:
 
 
 def RunTaskThanos(thread_num:int) -> None:
-    processPool = []
     os.chdir("build")
     files = os.listdir("../multithread/")
     for i in range(max_usr_cnt):
         for file in files:
             if file.endswith(".x"):
                 fout = open(f"../multithread/{file}.{i}_output", "w")
-                ret = subprocess.Popen(["./thanos","-v 0",f"../multithread/{file}",f"{thread_num} {4}"], stdout=fout)
+                ret = subprocess.Popen(["./thanos","-v 0",f"../multithread/{file}",f"{thread_num}",f"{4}"], stdout=fout)
                 ret.wait()
                 '''
                 if run_seq:
