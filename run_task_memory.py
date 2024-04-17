@@ -24,7 +24,7 @@ def RunTask(run_para: bool,thread_num: int) -> None:
                     print(ret.stderr)
                 else:
                     processPool.append(ret)
-                    time.sleep(random.random() * 5 + 5)
+                    time.sleep(random.random() * 5)
     if run_para:
         for process in processPool:
             process.wait()
@@ -46,7 +46,7 @@ def RunTaskThanos(run_para:bool,thread_num:int) -> None:
                     print(ret.stderr)
                 else:
                     processPool.append(ret)
-                    time.sleep(random.random() * 5 + 5)
+                    time.sleep(random.random() * 5)
     if run_para:
         for process in processPool:
             process.wait()
