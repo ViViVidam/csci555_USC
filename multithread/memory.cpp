@@ -24,7 +24,7 @@ int main(int argc,char** argv){
         return 0;
     }
 
-    int num_of_threads = atoi(argv[1]);
+    int num_of_threads = rand() % (atoi(argv[1]) - 1) + 2;
     int mode = atoi(argv[2]);
     auto threadpool = std::vector<std::thread>();
     for(auto i=0; i < num_of_threads; i++){
