@@ -16,7 +16,7 @@ def RunTask(run_para: bool,thread_num: int) -> None:
     files = os.listdir()
     for file in files:
         if file.endswith(".x"):
-            for i in tqdm.tqdm(range(max_usr_cnt)):
+            for i in tqdm(range(max_usr_cnt)):
                 fout = open(f"{file}.{i}_output", "w")
                 ret = subprocess.Popen([f"./{file}",f"{thread_num}",f"{4}"], stdout=fout)
                 if not run_para:
@@ -38,7 +38,7 @@ def RunTaskThanos(run_para:bool,thread_num:int) -> None:
     files = os.listdir("../multithread/")
     for file in files:
         if file.endswith(".x"):
-            for i in tqdm.tqdm(range(max_usr_cnt)):
+            for i in tqdm(range(max_usr_cnt)):
                 fout = open(f"../multithread/{file}.{i}_output", "w")
                 ret = subprocess.Popen(["./thanos","-v 0",f"../multithread/{file}",f"{thread_num}",f"{4}"], stdout=fout)
                 if not run_para:
