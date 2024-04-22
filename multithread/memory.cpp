@@ -8,17 +8,20 @@
 #define MAX_MEM 20000000
 
 unsigned int arr_size = 0;
-unsigned int iterations = 1000;
+unsigned int iterations = 10000;
 int* numbers_forw = nullptr;
 int* numbers_rev = nullptr;
 
 void runBenchmark(int mode);
-int main(int argc,char** argv){
-    srand(time(0));
-    arr_size = 1000000;//10000 + rand() % MAX_MEM;//1000,000
-    numbers_forw = new int[arr_size];
-    numbers_rev = new int[arr_size];
-
+int main(int argc,char** argv) {
+	srand(time(0));
+	arr_size = 2000000000;//10000 + rand() % MAX_MEM;//1000,000
+	numbers_forw = new int[arr_size];
+	numbers_rev = new int[arr_size];
+	for(auto i = 0; i < arr_size; i++) {
+		numbers_forw[i] = rand() % INT32_MAX;
+		numbers_rev[i] = rand() % INT32_MAX;
+	}
     if(argc!=3){
         std::cout << "specify num of threads, specify which to run (1:forward, 2:backward, 3:random, 4:all)" << std::endl;
         return 0;
@@ -85,7 +88,12 @@ void runBenchmark(int mode) {
         auto start = std::chrono::high_resolution_clock::now();
         for (int x = 0; x < iterations; x++)
             for (unsigned int i = 0; i < arr_size; ++i) {
-                p = (numbers_forw[p] + numbers_rev[p]) % arr_size;
+                auto next_p = (numbers_forw[p] + numbers_rev[p]) % arr_size;
+				auto temp1 = (numbers_forw[p] - numbers_rev[p]) % INT32_MAX;
+            	auto temp2 = (numbers_forw[p] + numbers_rev[p]) % INT32_MAX;
+            	numbers_forw[p]= temp1;
+            	numbers_rev[p] = temp2;
+            	p = next_p;
             }
         sum_random_ex_time = std::chrono::high_resolution_clock::now() - start;
     }
