@@ -3,7 +3,7 @@ import os
 import sys
 import subprocess
 import time
-max_usr_cnt = 5
+max_usr_cnt = 2
 # total_usr_cnt = 100
 targets = ["bt", "cg", "ep", "ft", "is", "lu", "mg", "sp", "ua"]
 
