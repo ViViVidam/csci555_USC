@@ -22,7 +22,7 @@ def RunTask(run_seq: bool) -> None:
                     ret.wait()
                     print(ret.stderr)
                 else:
-                    time.sleep(random.random() * 20 + 10)
+                    time.sleep(10)
                 processPool.append(ret)
         if not run_seq:
             for process in processPool:
@@ -47,7 +47,7 @@ def RunTaskThanos(run_seq: bool) -> None:
                     print(ret.stderr)
                 else:
                     processPool.append(ret)
-                    time.sleep(random.random() * 20 + 10)
+                    time.sleep(10)
         if not run_seq:
             for process in processPool:
                 process.wait()
