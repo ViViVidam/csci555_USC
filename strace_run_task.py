@@ -18,7 +18,7 @@ def RunTask(run_seq: bool) -> None:
         for file in files:
             if file.endswith(".x"):
                 fout = open(f"{file}.{i}_output", "w")
-                perf_out = open(f"{file}.{i}_output_strace", "w")
+                perf_out = f"{file}.{i}_output_strace"
                 ret = subprocess.Popen(["strace","-c","-o",f"{perf_out}",f"./{file}"], stdout=fout)
                 if run_seq:
                     ret.wait()
@@ -54,7 +54,7 @@ def RunTaskThanos(run_seq: bool) -> None:
         for file in files:
             if file.endswith(".x"):
                 fout = open(f"../NPB3.4.2/NPB3.4-OMP/bin/{file}.{i}_output", "w")
-                perf_out = open(f"../NPB3.4.2/NPB3.4-OMP/bin/{file}.{i}_output_strace", "w")
+                perf_out = f"../NPB3.4.2/NPB3.4-OMP/bin/{file}.{i}_output_strace"
                 ret = subprocess.Popen(["strace","-c","-o",f"{perf_out}","./thanos","-s 2 -v 0",f"../NPB3.4.2/NPB3.4-OMP/bin/{file}"], stdout=fout)
                 if run_seq:
                     ret.wait()
