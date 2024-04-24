@@ -22,7 +22,6 @@ def RunTask(run_seq: bool) -> None:
                 ret = subprocess.Popen(["strace","-c","-o",f"{perf_out}",f"./{file}"], stdout=fout)
                 if run_seq:
                     ret.wait()
-                    print(ret.stderr)
                     with open(perf_out, "r") as f:
                         lines = f.readlines()
                         line = lines[-1]
@@ -59,7 +58,6 @@ def RunTaskThanos(run_seq: bool) -> None:
                 ret = subprocess.Popen(["strace","-c","-o",f"{perf_out}","./thanos","-s 2 -v 0",f"../NPB3.4.2/NPB3.4-OMP/bin/{file}"], stdout=fout)
                 if run_seq:
                     ret.wait()
-                    print(ret.stderr)
                     with open(perf_out, "r") as f:
                         lines = f.readlines()
                         line = lines[-1]
