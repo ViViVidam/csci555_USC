@@ -30,6 +30,7 @@ def RunTask(run_seq: bool) -> None:
                             core = splits[0]
                             n = splits[3]
                             count = splits[2]
+                            print(splits)
                             if n == "cache-misses":
                                 v_counts[targets.index(perf_out[:2])] += float(count)
                             elif n == "cache-references":
