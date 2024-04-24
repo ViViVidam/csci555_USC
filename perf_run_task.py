@@ -20,7 +20,7 @@ def RunTask(run_seq: bool) -> None:
                 fout = open(f"{file}.{i}_output", "w")
                 perf_out = f"{file}.{i}_output_perf"
                 ret = subprocess.Popen(
-                    ["perf", "stat","-o",f"{perf_out}","--per-node","-a","-e", "cache-references,cache-misses",
+                    ["perf", "stat","-o",f"{perf_out}","--per-node","-a","-e", "mem_inst_retired.all_loads,mem_inst_retired.all_stores,cache-references,cache-misses",
                      f"./{file}"], stdout=fout)
                 if run_seq:
                     ret.wait()
@@ -72,7 +72,7 @@ def RunTaskThanos(run_seq: bool) -> None:
                 fout = open(f"../NPB3.4.2/NPB3.4-OMP/bin/{file}.{i}_output", "w")
                 perf_out = f"{file}.{i}_output_perf"
                 ret = subprocess.Popen(
-                    ["perf", "stat", "--per-node", "-a", "-o", f"{perf_out}", "-e", "cache-references,cache-misses",
+                    ["perf", "stat", "--per-node", "-a", "-o", f"{perf_out}", "-e", "mem_inst_retired.all_loads,mem_inst_retired.all_stores,cache-references,cache-misses",
                      "./thanos", "-v 1", f"../NPB3.4.2/NPB3.4-OMP/bin/{file}"], stdout=fout)
                 if run_seq:
                     ret.wait()
