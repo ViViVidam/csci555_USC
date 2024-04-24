@@ -26,7 +26,7 @@ def RunTask(run_seq: bool) -> None:
                     with open(perf_out, "r") as f:
                         lines = f.readlines()
                         line = lines[-1]
-                        _, timing, _ = line.split("\t")
+                        _, timing, _, _, _ = line.split("\t")
                         total_time += float(timing)
                 else:
                     time.sleep(10)
@@ -37,7 +37,7 @@ def RunTask(run_seq: bool) -> None:
                 with open(perf_out,"r") as f:
                     lines = f.readlines()
                     line = lines[-1]
-                    _,timing,_ = line.split("\t")
+                    _,timing, _,_,_ = line.split("\t")
                     total_time += float(timing)
             processPool.clear()
         print(f"round {i}")
@@ -62,7 +62,7 @@ def RunTaskThanos(run_seq: bool) -> None:
                     with open(perf_out, "r") as f:
                         lines = f.readlines()
                         line = lines[-1]
-                        _, timing, _ = line.split("\t")
+                        _, timing, _, _, _ = line.split("\t")
                         total_time += float(timing)
                 else:
                     processPool.append(ret)
@@ -73,7 +73,7 @@ def RunTaskThanos(run_seq: bool) -> None:
                 with open(perf_out,"r") as f:
                     lines = f.readlines()
                     line = lines[-1]
-                    _,timing,_ = line.split("\t")
+                    _,timing,_, _, _ = line.split("\t")
                     total_time += float(timing)
             processPool.clear()
         print(f"round {i}")
