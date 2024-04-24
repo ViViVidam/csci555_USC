@@ -25,7 +25,7 @@ def RunTask(run_seq: bool) -> None:
                 if run_seq:
                     ret.wait()
                     with open(perf_out, "r") as f:
-                        for line in f.readlines():
+                        for line in f.readlines()[1:]:
                             splits = line.split()
                             core = splits[0]
                             n = splits[3]
@@ -42,7 +42,7 @@ def RunTask(run_seq: bool) -> None:
             for perf_out, process in zip(perf_outs, processPool):
                 process.wait()
                 with open(perf_out, "r") as f:
-                    for line in f.readlines():
+                    for line in f.readlines()[1:]:
                         splits = line.split()
                         core = splits[0]
                         n = splits[3]
@@ -73,7 +73,7 @@ def RunTaskThanos(run_seq: bool) -> None:
                 if run_seq:
                     ret.wait()
                     with open(perf_out, "r") as f:
-                        for line in f.readlines():
+                        for line in f.readlines()[1:]:
                             splits = line.split()
                             core = splits[0]
                             n = splits[3]
@@ -90,7 +90,7 @@ def RunTaskThanos(run_seq: bool) -> None:
             for perf_out, process in zip(perf_outs,processPool):
                 process.wait()
                 with open(perf_out, "r") as f:
-                    for line in f.readlines():
+                    for line in f.readlines()[1:]:
                         splits = line.split()
                         core = splits[0]
                         n = splits[3]
