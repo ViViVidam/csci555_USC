@@ -26,6 +26,7 @@ def RunTask(run_seq: bool) -> None:
                     with open(perf_out, "r") as f:
                         lines = f.readlines()
                         line = lines[-1]
+                        print(line)
                         _, timing, _, _, _ = line.split(" ")
                         total_time += float(timing)
                 else:
@@ -62,6 +63,7 @@ def RunTaskThanos(run_seq: bool) -> None:
                     with open(perf_out, "r") as f:
                         lines = f.readlines()
                         line = lines[-1]
+                        print(line)
                         _, timing, _, _, _ = line.split(" ")
                         total_time += float(timing)
                 else:
