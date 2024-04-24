@@ -3,14 +3,15 @@ import os
 import sys
 import subprocess
 import time
+
 max_usr_cnt = 2
 # total_usr_cnt = 100
 targets = ["bt", "cg", "dc", "ep", "ft", "is", "lu", "mg", "sp", "ua"]
-
-
-
+t_counts = [0.] * len(targets)
+v_counts = [0.] * len(targets)
 def RunTask(run_seq: bool) -> None:
     processPool = []
+    perf_outs = []
     os.chdir("NPB3.4.2/NPB3.4-OMP/bin/")
     files = os.listdir()
     for i in range(max_usr_cnt):
@@ -18,7 +19,9 @@ def RunTask(run_seq: bool) -> None:
             if file.endswith(".x"):
                 fout = open(f"{file}.{i}_output", "w")
                 perf_out = f"{file}.{i}_output_perf"
-                ret = subprocess.Popen(["perf","stat","--per-node","-a","-o",f"{perf_out}","-e","cache-references,cache-misses",f"./{file}"], stdout=fout)
+                ret = subprocess.Popen(
+                    ["perf", "stat", "--per-node", "-a", "-o", f"{perf_out}", "-e", "cache-references,cache-misses",
+                     f"./{file}"], stdout=fout)
                 if run_seq:
                     ret.wait()
                     print(ret.stderr)
@@ -26,15 +29,24 @@ def RunTask(run_seq: bool) -> None:
                     time.sleep(10)
                 processPool.append(ret)
         if not run_seq:
-            for process in processPool:
+            for perf_out, process in zip(perf_outs, processPool):
                 process.wait()
+                with open(perf_out, "r") as f:
+                    for line in f.readlines():
+                        core, _, count, n, _ = line.split("\t")
+                        if n == "cache-misses":
+                            v_counts[targets.index(perf_out[:2])] += float(count)
+                        elif n == "cache-references":
+                            t_counts[targets.index(perf_out[:2])] = float(count)
             processPool.clear()
+            perf_outs.clear()
         print(f"round {i}")
     os.chdir("../../../")
 
 
 def RunTaskThanos(run_seq: bool) -> None:
     processPool = []
+    perf_outs = []
     os.chdir("build")
     files = os.listdir("../NPB3.4.2/NPB3.4-OMP/bin/")
     for i in range(max_usr_cnt):
@@ -42,22 +54,28 @@ def RunTaskThanos(run_seq: bool) -> None:
             if file.endswith(".x"):
                 fout = open(f"../NPB3.4.2/NPB3.4-OMP/bin/{file}.{i}_output", "w")
                 perf_out = f"{file}.{i}_output_perf"
-                ret = subprocess.Popen(["perf","stat","--per-node","-a","-o",f"{perf_out}","-e","cache-references,cache-misses", "./thanos","-v 1",f"../NPB3.4.2/NPB3.4-OMP/bin/{file}"], stdout=fout)
+                ret = subprocess.Popen(
+                    ["perf", "stat", "--per-node", "-a", "-o", f"{perf_out}", "-e", "cache-references,cache-misses",
+                     "./thanos", "-v 1", f"../NPB3.4.2/NPB3.4-OMP/bin/{file}"], stdout=fout)
                 if run_seq:
                     ret.wait()
                     print(ret.stderr)
-                    fout.close()
-                    perf_out.close()
                 else:
                     processPool.append(ret)
+                    perf_outs.append(perf_out)
                     time.sleep(10)
         if not run_seq:
-            for process in processPool:
+            for perf_out, process in zip(perf_outs,processPool):
                 process.wait()
-                perf_out.close()
-                fout.close()
-                with open(fout,"r")
+                with open(perf_out, "r") as f:
+                    for line in f.readlines():
+                        core, _, count, n, _ = line.split("\t")
+                        if n == "cache-misses":
+                            v_counts[targets.index(perf_out[:2])] += float(count)
+                        elif n == "cache-references":
+                            t_counts[targets.index(perf_out[:2])] = float(count)
             processPool.clear()
+            perf_outs.clear()
         print(f"round {i}")
     os.chdir("../../../")
 
@@ -73,4 +91,7 @@ if __name__ == "__main__":
         RunTaskThanos(mode == 1)
     else:
         RunTask(mode == 1)
-    print(f"runtime {(time.time() - beg) / max_usr_cnt}")
+    for name,v,t in zip(targets,v_counts,t_counts):
+        v = v / max_usr_cnt
+        t = t / max_usr_cnt
+        print(f"{name} {v/t}: {int(v)}")
