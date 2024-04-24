@@ -46,8 +46,10 @@ def RunTask(run_seq: bool) -> None:
             for perf_out, process in zip(perf_outs, processPool):
                 process.wait()
                 with open(perf_out, "r") as f:
+                    print(perf_out)
                     for line in f.readlines()[5:]:
                         splits = line.split()
+                        print(splits)
                         if len(splits) < 4:
                             continue
                         n = splits[3]
@@ -99,10 +101,12 @@ def RunTaskThanos(run_seq: bool) -> None:
                 with open(perf_out, "r") as f:
                     for line in f.readlines()[5:]:
                         splits = line.split()
+                        print(splits)
                         if len(splits) < 4:
                             continue
                         n = splits[3]
                         count = splits[2].replace(',','')
+                        print(count)
                         if n == "cache-misses":
                             v_counts[targets.index(perf_out[:2])] += float(count)
                         elif n == "cache-references":
