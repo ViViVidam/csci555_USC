@@ -24,20 +24,20 @@ def RunTask(run_seq: bool) -> None:
                      f"./{file}"], stdout=fout)
                 if run_seq:
                     ret.wait()
-                    print(ret.stderr)
+                    #print(ret.stderr)
                     with open(perf_out, "r") as f:
                         for line in f.readlines()[5:]:
                             splits = line.split()
                             if len(splits) < 4:
                                 continue
-                            print(line,splits)
+                            #print(line,splits)
                             core = splits[0]
                             n = splits[3]
                             count = splits[2].replace(',','')
                             if n == "cache-misses":
                                 v_counts[targets.index(perf_out[:2])] += float(count)
                             elif n == "cache-references":
-                                t_counts[targets.index(perf_out[:2])] = float(count)
+                                t_counts[targets.index(perf_out[:2])] += float(count)
                 else:
                     time.sleep(10)
                 processPool.append(ret)
@@ -54,7 +54,7 @@ def RunTask(run_seq: bool) -> None:
                         if n == "cache-misses":
                             v_counts[targets.index(perf_out[:2])] += float(count)
                         elif n == "cache-references":
-                            t_counts[targets.index(perf_out[:2])] = float(count)
+                            t_counts[targets.index(perf_out[:2])] += float(count)
             processPool.clear()
             perf_outs.clear()
         print(f"round {i}")
@@ -86,7 +86,7 @@ def RunTaskThanos(run_seq: bool) -> None:
                             if n == "cache-misses":
                                 v_counts[targets.index(perf_out[:2])] += float(count)
                             elif n == "cache-references":
-                                t_counts[targets.index(perf_out[:2])] = float(count)
+                                t_counts[targets.index(perf_out[:2])] += float(count)
                 else:
                     processPool.append(ret)
                     perf_outs.append(perf_out)
@@ -104,7 +104,7 @@ def RunTaskThanos(run_seq: bool) -> None:
                         if n == "cache-misses":
                             v_counts[targets.index(perf_out[:2])] += float(count)
                         elif n == "cache-references":
-                            t_counts[targets.index(perf_out[:2])] = float(count)
+                            t_counts[targets.index(perf_out[:2])] += float(count)
             processPool.clear()
             perf_outs.clear()
         print(f"round {i}")
