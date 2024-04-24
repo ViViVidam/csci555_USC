@@ -41,6 +41,7 @@ def RunTask(run_seq: bool) -> None:
                 else:
                     time.sleep(10)
                 processPool.append(ret)
+                perf_outs.append(perf_out)
         if not run_seq:
             for perf_out, process in zip(perf_outs, processPool):
                 process.wait()
