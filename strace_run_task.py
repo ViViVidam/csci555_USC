@@ -23,7 +23,7 @@ def RunTask(run_seq: bool) -> None:
                 if run_seq:
                     ret.wait()
                     print(ret.stderr)
-                    with open(perf_out, "f") as f:
+                    with open(perf_out, "r") as f:
                         lines = f.readlines()
                         line = lines[:-1]
                         _, timing, _ = line.split("\t")
@@ -34,7 +34,7 @@ def RunTask(run_seq: bool) -> None:
         if not run_seq:
             for process in processPool:
                 process.wait()
-                with open(perf_out,"f") as f:
+                with open(perf_out,"r") as f:
                     lines = f.readlines()
                     line = lines[:-1]
                     _,timing,_ = line.split("\t")
