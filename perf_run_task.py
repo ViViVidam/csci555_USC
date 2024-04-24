@@ -28,6 +28,8 @@ def RunTask(run_seq: bool) -> None:
                     with open(perf_out, "r") as f:
                         for line in f.readlines()[5:]:
                             splits = line.split()
+                            if len(splits) < 4:
+                                continue
                             print(line,splits)
                             core = splits[0]
                             n = splits[3]
@@ -45,7 +47,8 @@ def RunTask(run_seq: bool) -> None:
                 with open(perf_out, "r") as f:
                     for line in f.readlines()[5:]:
                         splits = line.split()
-                        core = splits[0]
+                        if len(splits) < 4:
+                            continue
                         n = splits[3]
                         count = splits[2].replace(',','')
                         if n == "cache-misses":
@@ -74,9 +77,10 @@ def RunTaskThanos(run_seq: bool) -> None:
                 if run_seq:
                     ret.wait()
                     with open(perf_out, "r") as f:
-                        for line in f.readlines()[1:]:
+                        for line in f.readlines()[5:]:
                             splits = line.split()
-                            core = splits[0]
+                            if len(splits) < 4:
+                                continue
                             n = splits[3]
                             count = splits[2].replace(',','')
                             if n == "cache-misses":
@@ -91,9 +95,10 @@ def RunTaskThanos(run_seq: bool) -> None:
             for perf_out, process in zip(perf_outs,processPool):
                 process.wait()
                 with open(perf_out, "r") as f:
-                    for line in f.readlines()[1:]:
+                    for line in f.readlines()[5:]:
                         splits = line.split()
-                        core = splits[0]
+                        if len(splits) < 4:
+                            continue
                         n = splits[3]
                         count = splits[2].replace(',','')
                         if n == "cache-misses":
