@@ -59,6 +59,8 @@ def RunTask(run_seq: bool) -> None:
                             v_counts[targets.index(perf_out[:2])] += float(count)
                         elif n == "cache-references":
                             t_counts[targets.index(perf_out[:2])] += float(count)
+            for name,v,t in zip(targets,v_counts,t_counts):
+                print(f"{name} {v/t}: {int(v)}")
             processPool.clear()
             perf_outs.clear()
         print(f"round {i}")
@@ -128,7 +130,3 @@ if __name__ == "__main__":
         RunTaskThanos(mode == 1)
     else:
         RunTask(mode == 1)
-    for name,v,t in zip(targets,v_counts,t_counts):
-        v = v / max_usr_cnt
-        t = t / max_usr_cnt
-        print(f"{name} {v/t}: {int(v)}")
