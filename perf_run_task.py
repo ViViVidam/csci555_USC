@@ -26,7 +26,7 @@ def RunTask(run_seq: bool) -> None:
                     ret.wait()
                     print(ret.stderr)
                     with open(perf_out, "r") as f:
-                        for line in f.readlines()[1:]:
+                        for line in f.readlines()[5:]:
                             splits = line.split()
                             print(line,splits)
                             core = splits[0]
@@ -43,7 +43,7 @@ def RunTask(run_seq: bool) -> None:
             for perf_out, process in zip(perf_outs, processPool):
                 process.wait()
                 with open(perf_out, "r") as f:
-                    for line in f.readlines()[1:]:
+                    for line in f.readlines()[5:]:
                         splits = line.split()
                         core = splits[0]
                         n = splits[3]
