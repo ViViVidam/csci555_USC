@@ -24,7 +24,16 @@ def RunTask(run_seq: bool) -> None:
                      f"./{file}"], stdout=fout)
                 if run_seq:
                     ret.wait()
-                    print(ret.stderr)
+                    with open(perf_out, "r") as f:
+                        for line in f.readlines():
+                            splits = line.split()
+                            core = splits[0]
+                            n = splits[3]
+                            count = splits[2]
+                            if n == "cache-misses":
+                                v_counts[targets.index(perf_out[:2])] += float(count)
+                            elif n == "cache-references":
+                                t_counts[targets.index(perf_out[:2])] = float(count)
                 else:
                     time.sleep(10)
                 processPool.append(ret)
@@ -62,7 +71,16 @@ def RunTaskThanos(run_seq: bool) -> None:
                      "./thanos", "-v 1", f"../NPB3.4.2/NPB3.4-OMP/bin/{file}"], stdout=fout)
                 if run_seq:
                     ret.wait()
-                    print(ret.stderr)
+                    with open(perf_out, "r") as f:
+                        for line in f.readlines():
+                            splits = line.split()
+                            core = splits[0]
+                            n = splits[3]
+                            count = splits[2]
+                            if n == "cache-misses":
+                                v_counts[targets.index(perf_out[:2])] += float(count)
+                            elif n == "cache-references":
+                                t_counts[targets.index(perf_out[:2])] = float(count)
                 else:
                     processPool.append(ret)
                     perf_outs.append(perf_out)
