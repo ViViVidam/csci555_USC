@@ -28,6 +28,7 @@ def RunTask(run_seq: bool) -> None:
             for process in processPool:
                 process.wait()
             processPool.clear()
+        subprocess.run(["rm","ADC*"])
         print(f"round {i}")
     os.chdir("../../../")
 
@@ -51,6 +52,7 @@ def RunTaskThanos(run_seq: bool) -> None:
             for process in processPool:
                 process.wait()
             processPool.clear()
+        subprocess.run(["rm","ADC*"])
         print(f"round {i}")
     os.chdir("../../../")
 
