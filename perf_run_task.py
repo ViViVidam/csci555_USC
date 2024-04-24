@@ -24,7 +24,7 @@ def RunTask(run_seq: bool) -> None:
                      f"./{file}"], stdout=fout)
                 if run_seq:
                     ret.wait()
-                    print(ret.stderr())
+                    print(ret.stderr)
                     with open(perf_out, "r") as f:
                         for line in f.readlines()[1:]:
                             splits = line.split()
