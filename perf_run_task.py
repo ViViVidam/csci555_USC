@@ -18,7 +18,7 @@ def RunTask(run_seq: bool) -> None:
             if file.endswith(".x"):
                 fout = open(f"{file}.{i}_output", "w")
                 perf_out = open(f"{file}.{i}_output_perf", "w")
-                ret = subprocess.Popen(["perf","stat","--per-node","-o",f"{perf_out}","-a","-e","task-clock,cycles,instructions,mem_load_l3_miss_retired.remote_fwd,mem_load_l3_miss_retired.remote_hitm,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,L1-dcache-stores,L1-dcache-store-misses,mem_inst_retired.all_loads,mem_inst_retired.all_stores,mem_load_l3_miss_retired.local_dram,mem_load_l3_miss_retired.remote_dram",f"./{file}"], stdout=fout)
+                ret = subprocess.Popen(["perf","stat","--per-node","-a","-o",f"{perf_out}","-e","cache-references,cache-misses",f"./{file}"], stdout=fout)
                 if run_seq:
                     ret.wait()
                     print(ret.stderr)
@@ -42,7 +42,7 @@ def RunTaskThanos(run_seq: bool) -> None:
             if file.endswith(".x"):
                 fout = open(f"../NPB3.4.2/NPB3.4-OMP/bin/{file}.{i}_output", "w")
                 perf_out = open(f"{file}.{i}_output_perf", "w")
-                ret = subprocess.Popen(["perf","stat","--per-node","-o",f"{perf_out}","-a","-e","task-clock,cycles,instructions,mem_load_l3_miss_retired.remote_fwd,mem_load_l3_miss_retired.remote_hitm,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,L1-dcache-stores,L1-dcache-store-misses,mem_inst_retired.all_loads,mem_inst_retired.all_stores,mem_load_l3_miss_retired.local_dram,mem_load_l3_miss_retired.remote_dram", "./thanos","-v 1",f"../NPB3.4.2/NPB3.4-OMP/bin/{file}"], stdout=fout)
+                ret = subprocess.Popen(["perf","stat","--per-node","-a","-o",f"{perf_out}","-e","cache-references,cache-misses", "./thanos","-v 1",f"../NPB3.4.2/NPB3.4-OMP/bin/{file}"], stdout=fout)
                 if run_seq:
                     ret.wait()
                     print(ret.stderr)
