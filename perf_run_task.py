@@ -20,7 +20,7 @@ def RunTask(run_seq: bool) -> None:
                 fout = open(f"{file}.{i}_output", "w")
                 perf_out = f"{file}.{i}_output_perf"
                 ret = subprocess.Popen(
-                    ["perf", "stat","-o",f"{perf_out}","--per-node","-a","-e", "cache-references,cache-misses","-e","mem_inst_retired.all_loads,mem_inst_retired.all_stores",
+                    ["perf", "stat","-o",f"{perf_out}","--per-node","-a","-e", "cache-references,cache-misses",
                      f"./{file}"], stdout=fout)
                 if run_seq:
                     ret.wait()
