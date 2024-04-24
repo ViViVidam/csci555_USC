@@ -20,17 +20,17 @@ def RunTask(run_seq: bool) -> None:
                 fout = open(f"{file}.{i}_output", "w")
                 perf_out = f"{file}.{i}_output_perf"
                 ret = subprocess.Popen(
-                    ["perf", "stat", "--per-node", "-a", "-o", f"{perf_out}", "-e", "cache-references,cache-misses",
+                    ["perf", "stat","-o",f"{perf_out}","--per-node","-a","-e", "cache-references,cache-misses",
                      f"./{file}"], stdout=fout)
                 if run_seq:
                     ret.wait()
                     with open(perf_out, "r") as f:
                         for line in f.readlines()[1:]:
                             splits = line.split()
+                            print(line,splits)
                             core = splits[0]
                             n = splits[3]
                             count = splits[2]
-                            print(line,splits)
                             if n == "cache-misses":
                                 v_counts[targets.index(perf_out[:2])] += float(count)
                             elif n == "cache-references":
