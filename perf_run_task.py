@@ -12,6 +12,7 @@ targets = ["bt", "cg", "dc", "ep", "ft", "is", "lu", "mg", "sp", "ua"]
 def RunTask(run_seq: bool) -> None:
     processPool = []
     os.chdir("NPB3.4.2/NPB3.4-OMP/bin/")
+    files = os.listdir()
     for i in range(max_usr_cnt):
         for file in files:
             if file.endswith(".x"):
